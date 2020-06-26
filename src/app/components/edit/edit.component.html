@@ -1,0 +1,29 @@
+<select   (change)="onChange($event.target.value)" class="Chose">
+    <option> Select your topic </option>
+    <option *ngFor="let book of books ; let index=index" value={{book.name}}>{{book.name}}</option> 
+
+   </select>
+
+    <div *ngIf="show" id="fillMe">
+        <form (ngSubmit)="update()" class ="MyForm">
+            Nom :
+
+            <input type="text"   [(ngModel)]="fetchbook.name" name="name" class="form-control" > 
+            Type :
+
+            <input type="text"   [(ngModel)]="fetchbook.type" name="type" class="form-control" > 
+            Prix : 
+
+            <input type="text"   [(ngModel)]="fetchbook.price" name="price" class="form-control" >
+            Lien :
+
+            <input type="text"   [(ngModel)]="fetchbook.link" name="link" class="form-control" >
+            <br>
+            <button type="button" class="btn btn-info" (click)="update()">Update</button>
+        
+            </form>
+
+    </div>
+
+
+   

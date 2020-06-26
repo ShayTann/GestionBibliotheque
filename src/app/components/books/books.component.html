@@ -1,0 +1,54 @@
+<table class="table">
+    <thead class="black white-text">
+      <tr>
+        <th scope="col">Numéro de livre</th>
+        <th scope="col">Nom de livre</th>
+        <th scope="col">Type de livre</th>
+        <th scope="col">Prix de livre</th>
+        <th scope="col"> Lire </th>
+      </tr>
+    </thead>
+    <tbody class ="table">
+      <tr *ngFor="let book of filtredBooks">
+        <th scope="row">{{book.bookid}}</th>
+        <td>{{book.name}}</td>
+        <td>{{book.type}}</td>
+        <td>{{book.price}}</td>
+        <td *ngIf="book.price == 0; else openlog"> <button (click)="redirect(book.link)" class="btn btn-outline-secondary waves-effect"> Lire </button></td>
+        <ng-template #openlog> 
+          <td> <button (click)="checkBook(book.name,book.link)" class="btn btn-outline-secondary waves-effect"> Lire </button> </td>
+        
+      
+
+
+
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- Search form -->
+<div class="md-form mt-0">
+  <form (ngSubmit)="setBooks()">
+  <input class="form-control search" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="tmpname" name="booksFilter">
+  
+  <button type="button " class="btn btn-info find" (click)="setBooks()">Find</button>
+
+</form>
+
+</div>
+<p class="text-primary msg" id="message" > {{message}} </p>
+
+
+<div *ngIf="isAdmin"> 
+  Supprimer un livre :
+  <select   (change)="getBook($event.target.value)">
+      <option> Select the book that you wanna delete </option>
+      <option *ngFor="let book of books ; let index=index" value={{book.bookid}}>{{book.name}}</option> 
+      </select>
+      <button type="button" class="btn btn-danger del" (click)="deleteBook()"> Delete !</button>
+      {{msg}}
+      
+    <a href="/edit"  ><button type="button" class="btn btn-info " > Editer un livre</button></a>
+
+</div>
